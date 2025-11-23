@@ -30,11 +30,11 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   final emailController = TextEditingController();
   final passController = TextEditingController();
+  late final authCubits = context.read<AuthCubits>();
 
   void loginButtonPressed() {
     final String email = emailController.text;
     final String pass = passController.text;
-    final authCubits = context.read<AuthCubits>();
 
     if (email.isNotEmpty && pass.isNotEmpty) {
       authCubits.login(email, pass);
@@ -43,6 +43,43 @@ class _LoginPageState extends State<LoginPage> {
         context,
       ).showSnackBar(const SnackBar(content: Text("Invalid Credentials")));
     }
+  }
+
+  void openForgotPassWordBox() {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text("Forgot Password ?"),
+        content: CustomTextField(
+          controller: emailController,
+          hintText: "Enter email.....",
+          isObscure: false,
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text("Cancel"),
+          ),
+          TextButton(
+            onPressed: () async {
+              final message = await authCubits.forgotPassword(
+                emailController.text.trim(),
+              );
+
+              if (message == "Password reset email send !  check you mail") {
+                Navigator.pop(context);
+                emailController.clear();
+              }
+
+              ScaffoldMessenger.of(
+                context,
+              ).showSnackBar(SnackBar(content: Text(message)));
+            },
+            child: const Text("Reset"),
+          ),
+        ],
+      ),
+    );
   }
 
   @override
@@ -101,17 +138,20 @@ class _LoginPageState extends State<LoginPage> {
               const SizedBox(height: 10),
 
               // forgot password
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  Text(
-                    "Forgot Password ?",
-                    style: TextStyle(
-                      color: Theme.of(context).colorScheme.primary,
-                      fontWeight: FontWeight.bold,
+              GestureDetector(
+                onTap: () => openForgotPassWordBox(),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Text(
+                      "Forgot Password ?",
+                      style: TextStyle(
+                        color: Theme.of(context).colorScheme.primary,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
               const SizedBox(height: 10),
 
