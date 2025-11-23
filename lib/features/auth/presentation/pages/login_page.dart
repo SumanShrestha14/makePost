@@ -30,7 +30,13 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   final emailController = TextEditingController();
   final passController = TextEditingController();
-  late final authCubits = context.read<AuthCubits>();
+  late final AuthCubits authCubits;
+
+  @override
+  void initState() {
+    super.initState();
+    authCubits = context.read<AuthCubits>();
+  }
 
   void loginButtonPressed() {
     final String email = emailController.text;
@@ -83,19 +89,15 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   @override
+  void dispose() {
+    emailController.dispose();
+    passController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // APPBAR
-      // appBar: AppBar(
-      //   title: Center(
-      //     child: Text(
-      //       "Login",
-      //       style: TextStyle(fontWeight: FontWeight.w900, fontSize: 24),
-      //     ),
-      //   ),
-      //   leading: Icon(Icons.menu),
-      // ),
-
       // BODY
       body: Center(
         child: Padding(
