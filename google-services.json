@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "542713536916",
+    "project_id": "makepost-d51d9",
+    "storage_bucket": "makepost-d51d9.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:542713536916:android:86a312abb942d0022a2f81",
+        "android_client_info": {
+          "package_name": "com.example.makepost"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "542713536916-3v3svb5k8ei3f5q4lioku970emabs3pc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDSVMa6u3vSohzt8g8I-dTMGEAD90GweOI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "542713536916-3v3svb5k8ei3f5q4lioku970emabs3pc.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "542713536916-jqhbemgpmisv43bfjia201hkvegorcp0.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.makepost"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
